@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Роберт Кох — Фан-сайт</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #6a11cb;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+    }
+    nav a:hover { text-decoration: underline; }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    section { display: none; padding: 1.5rem 0; }
+    section.active { display: block; }
+    h1, h2 { margin-bottom: 1rem; color: #5a00a0; }
+    p { margin-bottom: 1rem; }
+    .character-card {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .upload-form, .gallery, .author-gallery {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .author-gallery img {
+      max-width: 300px;
+      margin: 0.5rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    input[type="file"] { margin: 0.5rem 0; width: 100%; }
+    button {
+      background: #6a11cb;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    button:hover { background: #5a00a0; }
+    .gallery-item {
+      margin: 1rem 0;
+      padding: 0.8rem;
+      background: #f0f0f0;
+      border-radius: 6px;
+    }
+    .gallery-item a {
+      color: #6a11cb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .gallery-item a:hover { text-decoration: underline; }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #777;
+      font-size: 0.9rem;
+      background: #eee;
+      margin-top: 2rem;
+    }
+    .social-footer {
+      background: #6a11cb;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .social-footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Роберт Кох</h2>
+  <nav>
+    <a href="#" class="nav-link" data-page="home">Главная</a>
+    <a href="#" class="nav-link" data-page="characters">Персонажи</a>
+    <a href="#" class="nav-link" data-page="story">История</a>
+    <a href="#" class="nav-link" data-page="author-gallery">Галерея автора</a>
+    <a href="#" class="nav-link" data-page="upload">Загрузить</a>
+    <a href="#" class="nav-link" data-page="gallery">Фан-арты</a>
+  </nav>
+</header>
+
+<div class="container">
+  <!-- Главная -->
+  <section id="home" class="active">
+    <h1>Добро пожаловать в мир Роберта Коха!</h1>
+    <p>Здесь собрана вся информация о вселенной: персонажи, сюжет, хронология и многое другое.</p>
+    <p>Также вы можете загрузить свой фан-арт и посмотреть работы других фанатов!</p>
+  </section>
+
+  <!-- Персонажи -->
+  <section id="characters">
+    <h1>Персонажи</h1>
+    <div class="character-card">
+      <h2>Роберт Кох</h2>
+      <p>[Краткое описание персонажа Роберт Кох: роль, характер, история]</p>
+    </div>
+    <div class="character-card">
+      <h2>61</h2>
+      <p>[Краткое описание персонажа 61: роль, характер, связь с Робертом Кохом]</p>
+    </div>
+  </section>
+
+  <!-- История -->
+  <section id="story">
+    <h1>Сюжет</h1>
+    <p>[Краткий пересказ основной истории. Можно разбить на абзацы.]</p>
+    <p>[Можно добавить ключевые события, поворотные моменты, концовку (с предупреждением о спойлерах) и т.д.]</p>
+  </section>
+
+  <!-- Галерея автора -->
+  <section id="author-gallery">
+    <h1>Основные работы</h1>
+    <div class="author-gallery">
+      <img src="assets/robert-main.jpg" alt="Роберт Кох">
+      <img src="assets/robert-61-together.png" alt="Роберт Кох и 61">
+      <img src="assets/cover-art.jpg" alt="Обложка">
+    </div>
+    <p style="margin-top: 1rem; font-style: italic;">Эти изображения добавлены автором сайта. Позже появятся новые!</p>
+  </section>
+
+  <!-- Загрузка -->
+  <section id="upload">
+    <h1>Загрузить фан-арт или файл</h1>
+    <p>Поделись своим творчеством! Поддерживаются любые файлы: изображения, видео, PDF, архивы и др.</p>
+    <div class="upload-form">
+      <input type="file" id="fileInput" />
+      <button id="uploadBtn">Загрузить</button>
+      <p id="uploadStatus"></p>
+    </div>
+  </section>
+
+  <!-- Галерея сообщества -->
+  <section id="gallery">
+    <h1>Фан-арты от сообщества</h1>
+    <div class="gallery" id="galleryContainer">
+      <p>Загрузка...</p>
+    </div>
+  </section>
+</div>
+
+<!-- Основной футер (авторская надпись) -->
+<footer>
+  robertkoh фан-сайт • не коммерческий проект • создан с ❤️
+</footer>
+
+<!-- Плашка соцсетей — в самом низу -->
+<div class="social-footer">
+  <a href="https://youtube.com/@medniybicok228?si=baTVkLkqZ9hxrriE" target="_blank">YouTube</a>
+  <a href="https://www.tiktok.com/@medniybichok228?_r=1&_t=ZS-91yQGrFp7HF" target="_blank">TikTok</a>
+</div>
+
+<!-- Подключаем Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // === НАВИГАЦИЯ (работает ВСЕГДА, даже без интернета) ===
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+      });
+    });
+  });
+
+  // === SUPABASE (загрузка и галерея) ===
+  const SUPABASE_URL = 'https://wptzbqqkzdyirgtiohmp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_4H9cIW37iMVdJj7MV3Sg6g_rLN0mIH1';
+
+  const { createClient } = supabase;
+  const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Загрузка файла
+  document.getElementById('uploadBtn')?.addEventListener('click', async () => {
+    const fileInput = document.getElementById('fileInput');
+    const status = document.getElementById('uploadStatus');
+    const file = fileInput?.files[0];
+    
+    if (!file) {
+      status.textContent = '⚠️ Выберите файл!';
+      return;
+    }
+
+    status.textContent = 'Загрузка...';
+    const filePath = `fan-uploads/${Date.now()}_${file.name}`;
+    
+    try {
+      const { data, error } = await supabaseClient.storage
+        .from('fan-uploads')
+        .upload(filePath, file, { upsert: false });
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabaseClient.storage
+        .from('fan-uploads')
+        .getPublicUrl(filePath);
+
+      const { error: insertError } = await supabaseClient
+        .from('uploads')
+        .insert({ file_path: filePath, file_name: file.name, url: publicUrl });
+
+      if (insertError) console.warn('Не удалось сохранить в БД:', insertError);
+
+      status.textContent = '✅ Успешно загружено!';
+      fileInput.value = '';
+      loadGallery();
+    } catch (error) {
+      console.error(error);
+      status.textContent = '❌ Ошибка: ' + (error.message || 'неизвестно');
+    }
+  });
+
+  // Загрузка галереи
+  async function loadGallery() {
+    const container = document.getElementById('galleryContainer');
+    if (!container) return;
+
+    container.innerHTML = '<p>Загрузка галереи...</p>';
+
+    try {
+      const { data, error } = await supabaseClient
+        .from('uploads')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p>Пока никто ничего не загрузил. Стань первым!</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `
+          <strong>${item.file_name}</strong><br>
+          <a href="${item.url}" target="_blank" download>Скачать / Открыть</a>
+        `;
+        container.appendChild(div);
+      });
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = '<p>❌ Не удалось загрузить галерею.</p>';
+    }
+  }
+
+  // Загружаем галерею при старте
+  loadGallery();
+</script>
+
+</body>
+</html>
