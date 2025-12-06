@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[Название фандома] — Фан-сайт</title>
+  <title>Роберт Кох — Фан-сайт</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.6;
     }
-    header {
+    header, .social-footer {
       background: #6a11cb;
       color: white;
       padding: 1rem 2rem;
@@ -20,6 +20,17 @@
       justify-content: space-between;
       align-items: center;
     }
+    .social-footer {
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .social-footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-footer a:hover { text-decoration: underline; }
     nav a {
       color: white;
       text-decoration: none;
@@ -43,13 +54,19 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .upload-form, .gallery {
+    .upload-form, .gallery, .author-gallery {
       background: white;
       padding: 1.5rem;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    input[type="file"] { margin: 0.5rem 0; }
+    .author-gallery img {
+      max-width: 300px;
+      margin: 0.5rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    input[type="file"] { margin: 0.5rem 0; width: 100%; }
     button {
       background: #6a11cb;
       color: white;
@@ -57,39 +74,49 @@
       padding: 0.5rem 1rem;
       border-radius: 4px;
       cursor: pointer;
+      margin-top: 0.5rem;
     }
     button:hover { background: #5a00a0; }
-    .gallery img {
-      max-width: 200px;
-      margin: 0.5rem;
+    .gallery-item {
+      margin: 1rem 0;
+      padding: 0.8rem;
+      background: #f0f0f0;
       border-radius: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }
+    .gallery-item a {
+      color: #6a11cb;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .gallery-item a:hover { text-decoration: underline; }
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 1.5rem;
       color: #777;
       font-size: 0.9rem;
+      background: #eee;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h2>[Название фандома]</h2>
+  <h2>Роберт Кох</h2>
   <nav>
     <a href="#" class="nav-link" data-page="home">Главная</a>
     <a href="#" class="nav-link" data-page="characters">Персонажи</a>
     <a href="#" class="nav-link" data-page="story">История</a>
+    <a href="#" class="nav-link" data-page="author-gallery">Галерея автора</a>
     <a href="#" class="nav-link" data-page="upload">Загрузить</a>
-    <a href="#" class="nav-link" data-page="gallery">Галерея</a>
+    <a href="#" class="nav-link" data-page="gallery">Фан-арты</a>
   </nav>
 </header>
 
 <div class="container">
   <!-- Главная -->
   <section id="home" class="active">
-    <h1>Добро пожаловать в мир [Название фандома]!</h1>
+    <h1>Добро пожаловать в мир Роберта Коха!</h1>
     <p>Здесь собрана вся информация о вселенной: персонажи, сюжет, хронология и многое другое.</p>
     <p>Также вы можете загрузить свой фан-арт и посмотреть работы других фанатов!</p>
   </section>
@@ -98,12 +125,12 @@
   <section id="characters">
     <h1>Персонажи</h1>
     <div class="character-card">
-      <h2>[Имя персонажа 1]</h2>
-      <p>[Краткое описание: роль, характер, история]</p>
+      <h2>Роберт Кох</h2>
+      <p>[Краткое описание персонажа Роберт Кох: роль, характер, история]</p>
     </div>
     <div class="character-card">
-      <h2>[Имя персонажа 2]</h2>
-      <p>[Краткое описание]</p>
+      <h2>61</h2>
+      <p>[Краткое описание персонажа 61: роль, характер, связь с Робертом Кохом]</p>
     </div>
   </section>
 
@@ -114,49 +141,57 @@
     <p>[Можно добавить ключевые события, поворотные моменты, концовку (с предупреждением о спойлерах) и т.д.]</p>
   </section>
 
+  <!-- Галерея автора (стартовые изображения) -->
+  <section id="author-gallery">
+    <h1>Основные работы</h1>
+    <div class="author-gallery">
+      <!-- Замени на свои файлы в папке assets/ -->
+      <img src="assets/robert-main.jpg" alt="Роберт Кох">
+      <img src="assets/robert-61-together.png" alt="Роберт Кох и 61">
+      <img src="assets/cover-art.jpg" alt="Обложка">
+    </div>
+    <p style="margin-top: 1rem; font-style: italic;">Эти изображения добавлены автором сайта. Позже появятся новые!</p>
+  </section>
+
   <!-- Загрузка -->
   <section id="upload">
-    <h1>Загрузить фан-арт</h1>
-    <p>Поделись своим творчеством! Поддерживаются фото (JPEG, PNG). Видео пока не поддерживаются (но можно добавить позже).</p>
+    <h1>Загрузить фан-арт или файл</h1>
+    <p>Поделись своим творчеством! Поддерживаются любые файлы: изображения, видео, PDF, архивы и др.</p>
     <div class="upload-form">
-      <input type="file" id="fileInput" accept="image/*" />
-      <br>
+      <input type="file" id="fileInput" />
       <button id="uploadBtn">Загрузить</button>
       <p id="uploadStatus"></p>
     </div>
   </section>
 
-  <!-- Галерея -->
+  <!-- Общая галерея (все загрузки) -->
   <section id="gallery">
-    <h1>Галерея фан-артов</h1>
+    <h1>Фан-арты от сообщества</h1>
     <div class="gallery" id="galleryContainer">
-      <!-- Сюда будут подгружаться изображения -->
+      <p>Загрузка...</p>
     </div>
   </section>
 </div>
 
+<!-- Соцсети (контрастный футер) -->
+<div class="social-footer">
+  <a href="https://youtube.com/@medniybicok228?si=baTVkLkqZ9hxrriE" target="_blank">YouTube</a>
+  <a href="https://www.tiktok.com/@medniybichok228?_r=1&_t=ZS-91yQGrFp7HF" target="_blank">TikTok</a>
+</div>
+
 <footer>
-  &copy; 2025 [Название фандома]. Все права защищены. Сайт создан фанатом для фанатов.
+  robertkoh фан-сайт • не коммерческий проект • создан с ❤️
 </footer>
 
-<!-- Подключаем Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<!-- Подключаем Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // 🔥 ВСТАВЬ СВОЙ КОНФИГ ИЗ FIREBASE ЗДЕСЬ
-  const firebaseConfig = {
-    apiKey: "[ВСТАВЬ СВОЙ apiKey]",
-    authDomain: "[ВСТАВЬ СВОЙ authDomain]",
-    projectId: "[ВСТАВЬ СВОЙ projectId]",
-    storageBucket: "[ВСТАВЬ СВОЙ storageBucket]",
-    messagingSenderId: "[ВСТАВЬ СВОЙ messagingSenderId]",
-    appId: "[ВСТАВЬ СВОЙ appId]"
-  };
+  // 🔑 Supabase credentials
+  const SUPABASE_URL = 'https://wptzbqqkzdyirgtiohmp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_4H9cIW37iMVdJj7MV3Sg6g_rLN0mIH1';
 
-  // Инициализация Firebase
-  firebase.initializeApp(firebaseConfig);
-  const storage = firebase.storage();
+  const supabase = supabase.create(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // Навигация
   document.querySelectorAll('.nav-link').forEach(link => {
@@ -168,7 +203,7 @@
     });
   });
 
-  // Загрузка файла
+  // Загрузка файла в Supabase Storage
   document.getElementById('uploadBtn').addEventListener('click', async () => {
     const fileInput = document.getElementById('fileInput');
     const status = document.getElementById('uploadStatus');
@@ -180,42 +215,68 @@
     }
 
     status.textContent = 'Загрузка...';
-    const filePath = `fanarts/${Date.now()}_${file.name}`;
-    const storageRef = storage.ref(filePath);
-
+    const filePath = `fan-uploads/${Date.now()}_${file.name}`;
+    
     try {
-      await storageRef.put(file);
-      const url = await storageRef.getDownloadURL();
-      // Сохраняем URL в localStorage (временное решение)
-      let urls = JSON.parse(localStorage.getItem('fanarts') || '[]');
-      urls.unshift(url); // добавляем в начало
-      localStorage.setItem('fanarts', JSON.stringify(urls));
+      const { data, error } = await supabase.storage
+        .from('fan-uploads')
+        .upload(filePath, file, { upsert: false });
+
+      if (error) throw error;
+
+      // Получаем публичную ссылку
+      const { data: { publicUrl } } = supabase.storage
+        .from('fan-uploads')
+        .getPublicUrl(filePath);
+
+      // Сохраняем в базу данных (чтобы отображать всем)
+      const { error: insertError } = await supabase
+        .from('uploads')
+        .insert({ file_path: filePath, file_name: file.name, url: publicUrl });
+
+      if (insertError) console.warn('Не удалось сохранить в БД:', insertError);
+
       status.textContent = '✅ Успешно загружено!';
-      fileInput.value = ''; // сброс
-      loadGallery(); // обновляем галерею
+      fileInput.value = '';
+      loadGallery();
     } catch (error) {
       console.error(error);
-      status.textContent = '❌ Ошибка: ' + error.message;
+      status.textContent = '❌ Ошибка: ' + (error.message || 'неизвестно');
     }
   });
 
-  // Загрузка галереи
-  function loadGallery() {
+  // Загрузка галереи из Supabase
+  async function loadGallery() {
     const container = document.getElementById('galleryContainer');
-    container.innerHTML = '<p>Загрузка...</p>';
-    const urls = JSON.parse(localStorage.getItem('fanarts') || '[]');
-    if (urls.length === 0) {
-      container.innerHTML = '<p>Пока нет работ. Стань первым!</p>';
-      return;
+    container.innerHTML = '<p>Загрузка галереи...</p>';
+
+    try {
+      const { data, error } = await supabase
+        .from('uploads')
+        .select('*')
+        .order('id', { ascending: false });
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p>Пока никто ничего не загрузил. Стань первым!</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+      data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.innerHTML = `
+          <strong>${item.file_name}</strong><br>
+          <a href="${item.url}" target="_blank" download>Скачать / Открыть</a>
+        `;
+        container.appendChild(div);
+      });
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = '<p>❌ Не удалось загрузить галерею.</p>';
     }
-    container.innerHTML = '';
-    urls.forEach(url => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = 'Фан-арт';
-      img.loading = 'lazy';
-      container.appendChild(img);
-    });
   }
 
   // Загружаем галерею при старте
