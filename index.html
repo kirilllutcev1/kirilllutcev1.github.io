@@ -12,7 +12,7 @@
       color: #333;
       line-height: 1.6;
     }
-    header, .social-footer {
+    header {
       background: #6a11cb;
       color: white;
       padding: 1rem 2rem;
@@ -20,17 +20,6 @@
       justify-content: space-between;
       align-items: center;
     }
-    .social-footer {
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .social-footer a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .social-footer a:hover { text-decoration: underline; }
     nav a {
       color: white;
       text-decoration: none;
@@ -97,6 +86,21 @@
       background: #eee;
       margin-top: 2rem;
     }
+    .social-footer {
+      background: #6a11cb;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .social-footer a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .social-footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -141,11 +145,10 @@
     <p>[Можно добавить ключевые события, поворотные моменты, концовку (с предупреждением о спойлерах) и т.д.]</p>
   </section>
 
-  <!-- Галерея автора (стартовые изображения) -->
+  <!-- Галерея автора -->
   <section id="author-gallery">
     <h1>Основные работы</h1>
     <div class="author-gallery">
-      <!-- Замени на свои файлы в папке assets/ -->
       <img src="assets/robert-main.jpg" alt="Роберт Кох">
       <img src="assets/robert-61-together.png" alt="Роберт Кох и 61">
       <img src="assets/cover-art.jpg" alt="Обложка">
@@ -164,7 +167,7 @@
     </div>
   </section>
 
-  <!-- Общая галерея (все загрузки) -->
+  <!-- Галерея сообщества -->
   <section id="gallery">
     <h1>Фан-арты от сообщества</h1>
     <div class="gallery" id="galleryContainer">
@@ -173,41 +176,45 @@
   </section>
 </div>
 
-<!-- Соцсети (контрастный футер) -->
+<!-- Основной футер (авторская надпись) -->
+<footer>
+  robertkoh фан-сайт • не коммерческий проект • создан с ❤️
+</footer>
+
+<!-- Плашка соцсетей — в самом низу -->
 <div class="social-footer">
   <a href="https://youtube.com/@medniybicok228?si=baTVkLkqZ9hxrriE" target="_blank">YouTube</a>
   <a href="https://www.tiktok.com/@medniybichok228?_r=1&_t=ZS-91yQGrFp7HF" target="_blank">TikTok</a>
 </div>
 
-<footer>
-  robertkoh фан-сайт • не коммерческий проект • создан с ❤️
-</footer>
-
 <!-- Подключаем Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // 🔑 Supabase credentials
-  const SUPABASE_URL = 'https://wptzbqqkzdyirgtiohmp.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_4H9cIW37iMVdJj7MV3Sg6g_rLN0mIH1';
-
-  const supabase = supabase.create(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // Навигация
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const page = link.dataset.page;
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(page).classList.add('active');
+  // === НАВИГАЦИЯ (работает ВСЕГДА, даже без интернета) ===
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(page).classList.add('active');
+      });
     });
   });
 
-  // Загрузка файла в Supabase Storage
-  document.getElementById('uploadBtn').addEventListener('click', async () => {
+  // === SUPABASE (загрузка и галерея) ===
+  const SUPABASE_URL = 'https://wptzbqqkzdyirgtiohmp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_4H9cIW37iMVdJj7MV3Sg6g_rLN0mIH1';
+
+  const { createClient } = supabase;
+  const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Загрузка файла
+  document.getElementById('uploadBtn')?.addEventListener('click', async () => {
     const fileInput = document.getElementById('fileInput');
     const status = document.getElementById('uploadStatus');
-    const file = fileInput.files[0];
+    const file = fileInput?.files[0];
     
     if (!file) {
       status.textContent = '⚠️ Выберите файл!';
@@ -218,19 +225,17 @@
     const filePath = `fan-uploads/${Date.now()}_${file.name}`;
     
     try {
-      const { data, error } = await supabase.storage
+      const { data, error } = await supabaseClient.storage
         .from('fan-uploads')
         .upload(filePath, file, { upsert: false });
 
       if (error) throw error;
 
-      // Получаем публичную ссылку
-      const { data: { publicUrl } } = supabase.storage
+      const { data: { publicUrl } } = supabaseClient.storage
         .from('fan-uploads')
         .getPublicUrl(filePath);
 
-      // Сохраняем в базу данных (чтобы отображать всем)
-      const { error: insertError } = await supabase
+      const { error: insertError } = await supabaseClient
         .from('uploads')
         .insert({ file_path: filePath, file_name: file.name, url: publicUrl });
 
@@ -245,13 +250,15 @@
     }
   });
 
-  // Загрузка галереи из Supabase
+  // Загрузка галереи
   async function loadGallery() {
     const container = document.getElementById('galleryContainer');
+    if (!container) return;
+
     container.innerHTML = '<p>Загрузка галереи...</p>';
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
         .from('uploads')
         .select('*')
         .order('id', { ascending: false });
